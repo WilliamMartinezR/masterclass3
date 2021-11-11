@@ -5,8 +5,8 @@
  */
 package co.usa.ciclo3.ciclo3.web;
 
-import co.usa.ciclo3.ciclo3.model.Client;
-import co.usa.ciclo3.ciclo3.service.ClientService;
+import co.usa.ciclo3.ciclo3.model.Message;
+import co.usa.ciclo3.ciclo3.service.MessageService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,28 +26,29 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Martinez Huertas
  */
 @RestController
-@RequestMapping("/api/Client")
+@RequestMapping("/api/Message")
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-public class ClientController {
- 
+public class MessageController {
+    
     @Autowired
-    private ClientService clientService;
+    private MessageService messageService;
     
     @GetMapping("/all")
-    public List<Client> getClient(){
-        return clientService.getAll();    
+    public List<Message> getMessage(){
+        return messageService.getAll();    
     }
     @GetMapping("/{id}")
-    public Optional<Client> getClient(@PathVariable("id") int id){
-        return clientService.getClient(id);
+    public Optional<Message> getMessage(@PathVariable("id") int id){
+        return messageService.getMessage(id);
     
     }
     
     
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client save(@RequestBody Client c){
-        return clientService.save(c);
+    public Message save(@RequestBody Message me){
+        return messageService.save(me);
     
     }
+    
 }

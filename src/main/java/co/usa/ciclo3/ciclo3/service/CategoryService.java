@@ -5,8 +5,9 @@
  */
 package co.usa.ciclo3.ciclo3.service;
 
-
+import co.usa.ciclo3.ciclo3.model.Category;
 import co.usa.ciclo3.ciclo3.model.Client;
+import co.usa.ciclo3.ciclo3.repository.CategoryRepository;
 import co.usa.ciclo3.ciclo3.repository.ClientRepository;
 import java.util.List;
 import java.util.Optional;
@@ -18,34 +19,34 @@ import org.springframework.stereotype.Service;
  * @author Martinez Huertas
  */
 @Service
-public class ClientService {
+public class CategoryService {
     
     @Autowired
-    private ClientRepository clientRepository;
+    private CategoryRepository categoryRepository;
     
-    public List<Client> getAll(){
+    public List<Category> getAll(){
         
-        return clientRepository.getAll();
+        return categoryRepository.getAll();
     }
         
-    public Optional<Client> getClient(int id){
-            return clientRepository.getClient(id);
+    public Optional<Category> getCategory(int id){
+            return categoryRepository.getCategory(id);
     }
    
-    public Client save(Client  c){
-        if(c.getIdClient()==null){
-            return clientRepository.save(c);        
+    public Category save(Category  ca){
+        if(ca.getId()==null){
+            return categoryRepository.save(ca);        
         }else{
-            Optional<Client> maux=clientRepository.getClient(c.getIdClient());
+            Optional<Category> maux=categoryRepository.getCategory(ca.getId());
             if(maux.isEmpty()){
-                return clientRepository.save(c);            
+                return categoryRepository.save(ca);            
             }else{
-                return c;
+                return ca;
             
             }
         
         }
     
     }
+    
 }
-

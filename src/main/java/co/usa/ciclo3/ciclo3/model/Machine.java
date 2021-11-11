@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,91 +29,90 @@ public class Machine implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String brand;
-    private Integer model;
-    private Integer category_id;
     private String name;
+    private String brand;
+    private Integer year;
+    //private Integer category_id;
+    
+    private String description;
 
-    /**
-     *
-     * @return
-     */
+    
+    @ManyToOne
+    @JoinColumn (name="categoryIde")
+    @JsonIgnoreProperties("machines")
+    private Category category;
+    
+    @OneToMany (cascade = {CascadeType.PERSIST},mappedBy = "machine")
+    @JsonIgnoreProperties("machine")
+    public List<Message> messages;
+    
+    @OneToMany (cascade = {CascadeType.PERSIST},mappedBy = "machine")
+    @JsonIgnoreProperties("machine")
+    public List<Reservation> reservations;
+
     public Integer getId() {
         return id;
     }
 
-    /**
-     *
-     * @param id
-     */
     public void setId(Integer id) {
         this.id = id;
     }
 
-    /**
-     *
-     * @return
-     */
-    public String getBrand() {
-        return brand;
-    }
-
-    /**
-     *
-     * @param brand
-     */
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getModel() {
-        return model;
-    }
-
-    /**
-     *
-     * @param model
-     */
-    public void setModel(Integer model) {
-        this.model = model;
-    }
-
-    /**
-     *
-     * @return
-     */
-    public Integer getCategory_id() {
-        return category_id;
-    }
-
-    /**
-     *
-     * @param category_id
-     */
-    public void setCategory_id(Integer category_id) {
-        this.category_id = category_id;
-    }
-
-    /**
-     *
-     * @return
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     *
-     * @param name
-     */
     public void setName(String name) {
         this.name = name;
     }
-    
-    
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
     
 }

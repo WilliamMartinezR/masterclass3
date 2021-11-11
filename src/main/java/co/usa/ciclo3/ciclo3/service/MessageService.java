@@ -5,9 +5,10 @@
  */
 package co.usa.ciclo3.ciclo3.service;
 
-
 import co.usa.ciclo3.ciclo3.model.Client;
+import co.usa.ciclo3.ciclo3.model.Message;
 import co.usa.ciclo3.ciclo3.repository.ClientRepository;
+import co.usa.ciclo3.ciclo3.repository.MessageRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,29 +19,29 @@ import org.springframework.stereotype.Service;
  * @author Martinez Huertas
  */
 @Service
-public class ClientService {
+public class MessageService {
     
     @Autowired
-    private ClientRepository clientRepository;
+    private MessageRepository messageRepository;
     
-    public List<Client> getAll(){
+    public List<Message> getAll(){
         
-        return clientRepository.getAll();
+        return messageRepository.getAll();
     }
         
-    public Optional<Client> getClient(int id){
-            return clientRepository.getClient(id);
+    public Optional<Message> getMessage(int id){
+            return messageRepository.getMessage(id);
     }
    
-    public Client save(Client  c){
-        if(c.getIdClient()==null){
-            return clientRepository.save(c);        
+    public Message save(Message  me){
+        if(me.getIdMessage()==null){
+            return messageRepository.save(me);        
         }else{
-            Optional<Client> maux=clientRepository.getClient(c.getIdClient());
+            Optional<Message> maux=messageRepository.getMessage(me.getIdMessage());
             if(maux.isEmpty()){
-                return clientRepository.save(c);            
+                return messageRepository.save(me);            
             }else{
-                return c;
+                return me;
             
             }
         
@@ -48,4 +49,3 @@ public class ClientService {
     
     }
 }
-
