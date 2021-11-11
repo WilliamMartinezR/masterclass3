@@ -21,12 +21,11 @@ import javax.persistence.Table;
  * @author Martinez Huertas
  */
 @Entity
-@Table(name="Reservation")
+@Table(name="reservation")
 public class Reservation implements Serializable{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)    
     private Integer idReservation;
     private Date startDate;
     private Date devolutionDate;
@@ -34,13 +33,16 @@ public class Reservation implements Serializable{
     
     @ManyToOne
     @JoinColumn(name = "id")
-    @JsonIgnoreProperties("reservation")
+    @JsonIgnoreProperties("reservations")
     private Machine machine;
 
     @ManyToOne
     @JoinColumn(name = "idClient")
-    @JsonIgnoreProperties({"reservation","messages"})
+    @JsonIgnoreProperties({"reservations","messages"})
     private Client client;
+    
+    private String score; 
+    
 
 
     public Integer getIdReservation() {
@@ -90,6 +92,12 @@ public class Reservation implements Serializable{
     public void setClient(Client client) {
         this.client = client;
     }
+    public String getScore() {
+    return score;
+    }
 
+    public void setScore(String score) {
+        this.score = score;
+    }
     
 }

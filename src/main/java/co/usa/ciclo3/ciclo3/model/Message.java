@@ -21,21 +21,20 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="message")
-public class Message implements Serializable{
-    
+public class Message implements Serializable{    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMessage;
-    private String MessageText;
+    private String messageText;
     
     @ManyToOne
     @JoinColumn (name="machineIde")
-    @JsonIgnoreProperties({"messages","reservations"})
+    @JsonIgnoreProperties({"messages","client","reservations"})
     private Machine machine;
     
     @ManyToOne
     @JoinColumn (name="clientIde")
-    @JsonIgnoreProperties({"messages","reservations"})
+    @JsonIgnoreProperties({"messages","reservations","client"})
     private Client client;
 
     public Integer getIdMessage() {
@@ -47,11 +46,11 @@ public class Message implements Serializable{
     }
 
     public String getMessageText() {
-        return MessageText;
+        return messageText;
     }
 
-    public void setMessageText(String MessageText) {
-        this.MessageText = MessageText;
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
     }
 
     public Machine getMachine() {
