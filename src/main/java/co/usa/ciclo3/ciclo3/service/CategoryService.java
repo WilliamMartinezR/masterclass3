@@ -20,33 +20,61 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class CategoryService {
-    
+
     @Autowired
     private CategoryRepository categoryRepository;
-    
-    public List<Category> getAll(){
-        
+
+    public List<Category> getAll() {
         return categoryRepository.getAll();
     }
-        
-    public Optional<Category> getCategory(int id){
-            return categoryRepository.getCategory(id);
+
+    public Optional<Category> getCategory(int id) {
+        return categoryRepository.getCategory(id);
     }
-   
-    public Category save(Category  ca){
-        if(ca.getId()==null){
-            return categoryRepository.save(ca);        
-        }else{
-            Optional<Category> maux=categoryRepository.getCategory(ca.getId());
-            if(maux.isEmpty()){
-                return categoryRepository.save(ca);            
-            }else{
+
+    public Category save(Category ca) {
+        if (ca.getId() == null) {
+            return categoryRepository.save(ca);
+        } else {
+            Optional<Category> maux = categoryRepository.getCategory(ca.getId());
+            if (maux.isEmpty()) {
+                return categoryRepository.save(ca);
+            } else {
                 return ca;
-            
+
             }
-        
+
         }
-    
+
     }
-    
+
+    public Category update(Category ca) {
+        if (ca.getId() != null) {
+            Optional<Category> g = categoryRepository.getCategory(ca.getId());
+            if (!g.isEmpty()) {
+                
+                if (ca.getDescription() != null) {
+                   g.get().setDescription(ca.getDescription());
+                }
+                
+                if (ca.getName() != null) {
+                    g.get().setName(ca.getName());
+                }
+
+
+                return categoryRepository.save(g.get());
+            }
+        }
+        return ca;
+    }
+
+    public boolean deleteCategory(int id) {
+        Optional<Category> c = getCategory(id);
+        if (!c.isEmpty()) {
+            categoryRepository.delete(c.get());
+            return true;
+        }
+        return false;
+
+    }
 }

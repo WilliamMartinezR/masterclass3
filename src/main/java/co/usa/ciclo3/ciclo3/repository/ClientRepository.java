@@ -6,6 +6,7 @@
 package co.usa.ciclo3.ciclo3.repository;
 
 import co.usa.ciclo3.ciclo3.model.Client;
+import co.usa.ciclo3.ciclo3.model.Machine;
 import co.usa.ciclo3.ciclo3.repository.crud.ClientCrudRepository;
 import java.util.List;
 import java.util.Optional;
@@ -36,5 +37,9 @@ public class ClientRepository {
     public Client save(Client c){
     
         return clientCrudRepository.save(c);
+    }
+    public void delete(Client c){
+    
+        clientCrudRepository.delete(c);
     }
 }

@@ -7,6 +7,7 @@ package co.usa.ciclo3.ciclo3.service;
 
 
 import co.usa.ciclo3.ciclo3.model.Client;
+import co.usa.ciclo3.ciclo3.model.Machine;
 import co.usa.ciclo3.ciclo3.repository.ClientRepository;
 import java.util.List;
 import java.util.Optional;
@@ -46,6 +47,41 @@ public class ClientService {
         
         }
     
+    }
+        public Client update(Client c) {
+        if (c.getIdClient() != null) {
+            Optional<Client> g = clientRepository.getClient(c.getIdClient());
+            if (!g.isEmpty()) {
+                
+                
+                if (c.getName() != null) {
+                    g.get().setName(c.getName());
+                }
+                if (c.getPassword() != null) {
+                    g.get().setPassword(c.getPassword());
+                }
+                if (c.getAge() != null) {
+                    g.get().setAge(c.getAge());
+                }
+                if (c.getEmail() != null) {
+                    g.get().setEmail(c.getEmail());
+                }
+
+
+                return clientRepository.save(g.get());
+            }
+        }
+        return c;
+    }
+
+    public boolean deleteClient(int id) {
+        Optional<Client> c = getClient(id);
+        if (!c.isEmpty()) {
+            clientRepository.delete(c.get());
+            return true;
+        }
+        return false;
+
     }
 }
 

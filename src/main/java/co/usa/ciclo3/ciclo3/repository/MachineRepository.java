@@ -5,6 +5,7 @@
  */
 package co.usa.ciclo3.ciclo3.repository;
 
+import co.usa.ciclo3.ciclo3.model.Category;
 import co.usa.ciclo3.ciclo3.repository.crud.MachineCrudRepository;
 import co.usa.ciclo3.ciclo3.model.Machine;
 import java.util.List;
@@ -36,5 +37,10 @@ public class MachineRepository {
     public Machine save(Machine m){
     
         return machineCrudRepository.save(m);
+    }
+    
+    public void delete(Machine m){
+    
+        machineCrudRepository.delete(m);
     }
 }
