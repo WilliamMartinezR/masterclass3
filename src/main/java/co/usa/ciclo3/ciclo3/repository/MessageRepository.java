@@ -7,6 +7,7 @@ package co.usa.ciclo3.ciclo3.repository;
 
 
 
+import co.usa.ciclo3.ciclo3.model.Machine;
 import co.usa.ciclo3.ciclo3.model.Message;
 import co.usa.ciclo3.ciclo3.repository.crud.MessageCrudRepository;
 import java.util.List;
@@ -38,5 +39,9 @@ public class MessageRepository {
     public Message save(Message me){
     
         return messageCrudRepository.save(me);
+    }
+    public void delete(Message me){
+    
+       messageCrudRepository.delete(me);
     }
 }
