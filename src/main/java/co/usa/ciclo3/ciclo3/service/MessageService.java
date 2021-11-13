@@ -6,6 +6,7 @@
 package co.usa.ciclo3.ciclo3.service;
 
 import co.usa.ciclo3.ciclo3.model.Client;
+import co.usa.ciclo3.ciclo3.model.Machine;
 import co.usa.ciclo3.ciclo3.model.Message;
 import co.usa.ciclo3.ciclo3.repository.ClientRepository;
 import co.usa.ciclo3.ciclo3.repository.MessageRepository;
@@ -47,5 +48,29 @@ public class MessageService {
         
         }
     
+    }
+    public Message update(Message me) {
+        if (me.getIdMessage() != null) {
+            Optional<Message> g = messageRepository.getMessage(me.getIdMessage());
+            if (!g.isEmpty()) {
+                
+                if (me.getMessageText() != null) {
+                   g.get().setMessageText(me.getMessageText());
+                }
+                
+                return messageRepository.save(g.get());
+            }
+        }
+        return me;
+    }
+
+    public boolean deleteMessage(int id) {
+        Optional<Message> c = getMessage(id);
+        if (!c.isEmpty()) {
+            messageRepository.delete(c.get());
+            return true;
+        }
+        return false;
+
     }
 }
